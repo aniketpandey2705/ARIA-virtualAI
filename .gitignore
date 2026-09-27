@@ -1,0 +1,26 @@
+# Python
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# Node / Electron
+node_modules/
+electron/node_modules/
+npm-debug.log
+yarn-error.log
+
+# App Data & Temp Files
+aria_memory.db
+temp_*.wav
+temp_*.jpg
+out.wav
+*.wav
+
+# Models (Large files should not be committed to GitHub)
+models/
+
+# Environment Variables
+.env
+.env.local

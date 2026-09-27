@@ -1,0 +1,553 @@
+/* ====================================================
+   ARIA — Detroit: Become Human Aesthetic
+   Design: Ultra minimal, pristine white & android blue
+   ==================================================== */
+
+:root {
+  --bg-primary: #FFFFFF;
+  --bg-secondary: #F8F9FA;
+  --text-primary: #1A1D20;
+  --text-secondary: #495057;
+  --text-muted: #ADB5BD;
+  --accent: #00D4FF;
+  --accent-dark: #0077FF;
+  --accent-glow: rgba(0, 212, 255, 0.4);
+  --border: #E9ECEF;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-full: 9999px;
+  --transition: 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  --font: 'Inter', -apple-system, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  overflow: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 14px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  user-select: none;
+}
+
+/* ============================
+   Titlebar
+   ============================ */
+.titlebar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 40px;
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.titlebar-drag {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+  height: 100%;
+  -webkit-app-region: drag;
+}
+
+.titlebar-logo {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 6px;
+  color: var(--accent-dark);
+  text-transform: uppercase;
+}
+
+.titlebar-controls {
+  display: flex;
+  height: 100%;
+  -webkit-app-region: no-drag;
+}
+
+.titlebar-btn {
+  width: 46px;
+  height: 100%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--transition);
+}
+
+.titlebar-btn:hover {
+  background: var(--bg-secondary);
+}
+
+.btn-close:hover {
+  background: #ff4757;
+}
+
+/* Pure CSS window control icons */
+.icon-minimize {
+  width: 10px;
+  height: 1px;
+  background: var(--text-secondary);
+}
+
+.icon-maximize {
+  width: 10px;
+  height: 10px;
+  border: 1px solid var(--text-secondary);
+}
+
+.icon-close {
+  width: 12px;
+  height: 12px;
+  position: relative;
+}
+
+.icon-close::before,
+.icon-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 12px;
+  height: 1px;
+  background: var(--text-secondary);
+}
+
+.icon-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+.icon-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
+
+.btn-close:hover .icon-close::before,
+.btn-close:hover .icon-close::after { background: white; }
+
+/* ============================
+   Loading Screen
+   ============================ */
+.loading-screen {
+  position: fixed;
+  inset: 40px 0 0 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-primary);
+  z-index: 900;
+  gap: 30px;
+}
+
+.loading-orb {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  border-top-color: var(--accent);
+  animation: spin 1s linear infinite;
+}
+
+.orb-core {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 15px var(--accent-glow);
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.2); opacity: 1; }
+}
+
+.loading-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.loading-sub {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ============================
+   Main App Container
+   ============================ */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 40px;
+}
+
+/* ============================
+   Chat Area
+   ============================ */
+.chat-area {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: var(--bg-primary);
+}
+
+.chat-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 30px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  scroll-behavior: smooth;
+}
+
+/* Minimal Scrollbar */
+.chat-scroll::-webkit-scrollbar { width: 3px; }
+.chat-scroll::-webkit-scrollbar-track { background: transparent; }
+.chat-scroll::-webkit-scrollbar-thumb { background: var(--border); }
+
+/* ============================
+   Welcome Section
+   ============================ */
+.welcome-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  gap: 16px;
+  flex: 1;
+}
+
+.welcome-orb {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+  margin-bottom: 10px;
+}
+
+.welcome-title {
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--text-primary);
+}
+
+.welcome-sub {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+/* ============================
+   Messages (Ultra Minimal)
+   ============================ */
+.message {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  animation: fade-in 0.4s ease-out;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.message-user .message-label {
+  color: var(--text-muted);
+}
+
+.message-aria .message-label {
+  color: var(--accent-dark);
+}
+
+.message-bubble {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--text-primary);
+  padding-left: 12px;
+  border-left: 2px solid transparent;
+}
+
+.message-user .message-bubble {
+  border-left-color: var(--border);
+  color: var(--text-secondary);
+}
+
+.message-aria .message-bubble {
+  border-left-color: var(--accent);
+}
+
+/* Thinking indicator */
+.thinking-indicator {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  height: 24px;
+}
+
+.thinking-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  animation: blink 1.4s infinite both;
+}
+
+.thinking-dot:nth-child(2) { animation-delay: 0.2s; }
+.thinking-dot:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; }
+  40% { opacity: 1; }
+}
+
+/* ============================
+   Controls Area
+   ============================ */
+.controls-area {
+  padding: 20px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: var(--bg-primary);
+}
+
+/* Text Input */
+.input-row {
+  display: flex;
+  width: 100%;
+  position: relative;
+}
+
+.text-input {
+  flex: 1;
+  height: 44px;
+  padding: 0 44px 0 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-primary);
+  font-family: var(--font);
+  font-size: 13px;
+  outline: none;
+  transition: border-color var(--transition);
+}
+
+.text-input::placeholder {
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+
+.text-input:focus {
+  border-bottom-color: var(--accent);
+}
+
+.send-btn {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  width: 44px;
+  height: 44px;
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition);
+}
+
+.send-btn:hover {
+  transform: translateX(4px);
+}
+
+/* ============================
+   Voice Button (Android Ring)
+   ============================ */
+.voice-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.voice-btn {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--bg-primary);
+  cursor: pointer;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all var(--transition);
+}
+
+.voice-btn:hover {
+  border-color: var(--accent);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+.mic-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.mic-body {
+  width: 8px;
+  height: 14px;
+  border-radius: 4px;
+  background: var(--text-secondary);
+  transition: background var(--transition);
+}
+
+.mic-base {
+  width: 14px;
+  height: 6px;
+  border: 1.5px solid var(--text-secondary);
+  border-top: none;
+  border-radius: 0 0 6px 6px;
+  position: relative;
+  transition: border-color var(--transition);
+}
+
+.mic-base::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1.5px;
+  height: 4px;
+  background: var(--text-secondary);
+  transition: background var(--transition);
+}
+
+.voice-btn:hover .mic-body,
+.voice-btn:hover .mic-base::after { background: var(--accent); }
+.voice-btn:hover .mic-base { border-color: var(--accent); }
+
+/* Recording State */
+.voice-btn.recording {
+  border-color: var(--accent);
+  background: rgba(0, 212, 255, 0.05);
+  animation: pulse-ring 1.5s infinite;
+}
+
+.voice-btn.recording .mic-body,
+.voice-btn.recording .mic-base::after { background: var(--accent); }
+.voice-btn.recording .mic-base { border-color: var(--accent); }
+
+@keyframes pulse-ring {
+  0% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  70% { box-shadow: 0 0 0 15px rgba(0, 212, 255, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(0, 212, 255, 0); }
+}
+
+.voice-hint {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.voice-btn.recording ~ .voice-hint {
+  color: var(--accent);
+}
+
+/* ============================
+   Status Bar
+   ============================ */
+.status-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 0 0;
+  width: 100%;
+  justify-content: flex-start;
+}
+
+.status-dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.status-dot.connecting {
+  background: #f1c40f;
+  animation: blink 1s infinite;
+}
+
+.status-dot.error {
+  background: #e74c3c;
+}
+
+.status-text {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Utilities */
+.hidden { display: none !important; }
+.loading-screen.fade-out { animation: fade-out 0.5s ease forwards; }
+
+@keyframes fade-out {
+  to { opacity: 0; pointer-events: none; }
+}
+
+::selection {
+  background: rgba(0, 212, 255, 0.2);
+  color: var(--accent-dark);
+}

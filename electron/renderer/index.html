@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://127.0.0.1:5000 ws://127.0.0.1:5000; media-src 'self' blob:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com;">
+  <title>ARIA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Custom Title Bar -->
+  <header class="titlebar" id="titlebar">
+    <div class="titlebar-drag">
+      <span class="titlebar-logo">A R I A</span>
+    </div>
+    <div class="titlebar-controls">
+      <button class="titlebar-btn" id="btn-minimize" aria-label="Minimize">
+        <span class="icon-minimize"></span>
+      </button>
+      <button class="titlebar-btn" id="btn-maximize" aria-label="Maximize">
+        <span class="icon-maximize"></span>
+      </button>
+      <button class="titlebar-btn btn-close" id="btn-close" aria-label="Close">
+        <span class="icon-close"></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Loading Screen -->
+  <div class="loading-screen" id="loading-screen">
+    <div class="loading-orb">
+      <div class="orb-ring"></div>
+      <div class="orb-core"></div>
+    </div>
+    <p class="loading-text">Initializing ARIA</p>
+    <p class="loading-sub" id="loading-status">Connecting to backend...</p>
+  </div>
+
+  <!-- Main App -->
+  <main class="app-container" id="app-container" style="display: none;">
+    <!-- Chat Messages -->
+    <div class="chat-area" id="chat-area">
+      <div class="chat-scroll" id="chat-scroll">
+        <!-- Welcome message -->
+        <div class="welcome-section" id="welcome-section">
+          <div class="welcome-orb"></div>
+          <h2 class="welcome-title">I am ARIA</h2>
+          <p class="welcome-sub">System Online. Awaiting input.</p>
+        </div>
+        <!-- Messages will be inserted here -->
+      </div>
+    </div>
+
+    <!-- Bottom Controls -->
+    <div class="controls-area">
+      <!-- Text input -->
+      <div class="input-row">
+        <input type="text" class="text-input" id="text-input" placeholder="Enter command..." autocomplete="off">
+        <button class="send-btn" id="send-btn" aria-label="Send">
+          <span class="send-arrow">→</span>
+        </button>
+      </div>
+
+      <!-- Voice Button -->
+      <div class="voice-section">
+        <button class="voice-btn" id="voice-btn" aria-label="Hold to speak">
+          <div class="mic-icon">
+            <div class="mic-body"></div>
+            <div class="mic-base"></div>
+          </div>
+        </button>
+        <p class="voice-hint" id="voice-hint">Hold to speak</p>
+      </div>
+
+      <!-- Status Bar -->
+      <div class="status-bar">
+        <span class="status-dot" id="status-dot"></span>
+        <span class="status-text" id="status-text">Ready</span>
+      </div>
+    </div>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
